@@ -1,11 +1,14 @@
 # Learn Bevy
 
-This repository follows the following tutorials:
+This repository follows the following tutorial:
+[Youtube playlist of Learn Bevy 0.10](https://www.youtube.com/watch?v=TQt-v_bFdao&list=PLVnntJRoP85JHGX7rGDu6LaF3fmDDbqyd)
+
+Original repositories:
 - [learn-bevy](https://github.com/frederickjjoubert/learn-bevy)
 - [bevy-ball-game](https://github.com/frederickjjoubert/bevy-ball-game)
 
-[Youtube playlist of Learn Bevy 0.10](https://www.youtube.com/watch?v=TQt-v_bFdao&list=PLVnntJRoP85JHGX7rGDu6LaF3fmDDbqyd)
-
+Most of the work in this repository is typed after the tutorial, almost nothing is my own work here.
+I recommend checking out the original repositories and YouTube video series.
 
 # How to run
 

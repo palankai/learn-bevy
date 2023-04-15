@@ -1,6 +1,8 @@
 use crate::components::*;
 use crate::events::*;
 use crate::resources::*;
+use crate::utils::*;
+
 use bevy::app::AppExit;
 use bevy::prelude::*;
 use bevy::window::{PrimaryWindow, WindowResized};
@@ -36,10 +38,11 @@ pub fn spawn_player(
     asset_server: Res<AssetServer>,
 ) {
     let window = window_query.get_single().unwrap();
+
     commands.spawn((
         SpriteBundle {
             transform: Transform::from_xyz(window.width() / 2.0, window.height() / 2.0, 0.0),
-            texture: asset_server.load("sprites/ball_blue_large.png"),
+            texture: asset_server.load(path_join(vec!["sprites", "ball_blue_large.png"])),
             ..default()
         },
         Player {},
@@ -60,7 +63,7 @@ pub fn spawn_enemies(
         commands.spawn((
             SpriteBundle {
                 transform: Transform::from_xyz(x, y, 0.0),
-                texture: asset_server.load("sprites/ball_red_large.png"),
+                texture: asset_server.load(path_join(vec!["sprites", "ball_red_large.png"])),
                 ..default()
             },
             Enemy {
@@ -83,7 +86,7 @@ pub fn spawn_stars(
         commands.spawn((
             SpriteBundle {
                 transform: Transform::from_xyz(x, y, 0.0),
-                texture: asset_server.load("sprites/star.png"),
+                texture: asset_server.load(path_join(vec!["sprites", "star.png"])),
                 ..default()
             },
             Star {},
@@ -177,8 +180,8 @@ pub fn update_enemy_direction(
         }
 
         if direction_changed {
-            let sound_effect_1 = asset_server.load("audio/pluck_001.ogg");
-            let sound_effect_2 = asset_server.load("audio/pluck_002.ogg");
+            let sound_effect_1 = asset_server.load(path_join(vec!["audio", "pluck_001.ogg"]));
+            let sound_effect_2 = asset_server.load(path_join(vec!["audio", "pluck_002.ogg"]));
 
             let sound_effect = if random::<f32>() < 0.5 {
                 sound_effect_1
@@ -232,7 +235,8 @@ pub fn enemy_hit_player(
             let enemy_radius = ENEMY_SIZE / 2.0;
             if distance < player_radius + enemy_radius {
                 println!("Player hit!");
-                let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
+                let sound_effect =
+                    asset_server.load(path_join(vec!["audio", "explosionCrunch_000.ogg"]));
                 audio.play(sound_effect);
                 commands.entity(player_entity).despawn();
                 game_over_event_writer.send(GameOver { score: score.value });
@@ -259,7 +263,8 @@ pub fn player_hit_star(
             let star_radius = STAR_SIZE / 2.0;
             if distance < player_radius + star_radius {
                 score.value += 1;
-                let sound_effect = asset_server.load("audio/laserLarge_000.ogg");
+                let sound_effect =
+                    asset_server.load(path_join(vec!["audio", "laserLarge_000.ogg"]));
                 audio.play(sound_effect);
                 commands.entity(star_entity).despawn();
             }
@@ -310,7 +315,7 @@ pub fn spawn_stars_over_time(
         commands.spawn((
             SpriteBundle {
                 transform: Transform::from_xyz(x, y, 0.0),
-                texture: asset_server.load("sprites/star.png"),
+                texture: asset_server.load(path_join(vec!["sprites", "star.png"])),
                 ..default()
             },
             Star {},
@@ -336,7 +341,7 @@ pub fn spawn_enemies_over_time(
         commands.spawn((
             SpriteBundle {
                 transform: Transform::from_xyz(x, y, 0.0),
-                texture: asset_server.load("sprites/ball_red_large.png"),
+                texture: asset_server.load(path_join(vec!["sprites", "ball_red_large.png"])),
                 ..default()
             },
             Enemy {

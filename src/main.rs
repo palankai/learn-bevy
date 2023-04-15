@@ -1,13 +1,22 @@
 use bevy::prelude::*;
 
-mod components;
 mod events;
-mod resources;
 mod systems;
 mod utils;
 
+mod enemy;
+mod player;
+mod score;
+mod star;
+
+use enemy::resources::*;
+use enemy::systems::*;
 use events::*;
-use resources::*;
+use player::systems::*;
+use score::resources::*;
+use score::systems::*;
+use star::resources::*;
+use star::systems::*;
 use systems::*;
 
 fn main() {

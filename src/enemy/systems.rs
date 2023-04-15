@@ -5,9 +5,7 @@ use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use rand::prelude::*;
 
-pub const ENEMY_SIZE: f32 = 64.0;
-pub const NUMBER_OF_ENEMIES: usize = 4;
-pub const ENEMY_SPEED: f32 = 200.0;
+use super::*;
 
 pub fn spawn_enemies(
     mut commands: Commands,

@@ -1,17 +1,14 @@
 use super::super::enemy::components::Enemy;
-use super::super::enemy::systems::ENEMY_SIZE;
+use super::super::enemy::ENEMY_SIZE;
 use super::super::score::resources::Score;
 use super::super::star::components::Star;
-use super::super::star::systems::STAR_SIZE;
+use super::super::star::STAR_SIZE;
 use super::components::*;
+use super::*;
 use crate::events::*;
 use crate::utils::*;
-//use super::super::score::
 use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
-
-pub const PLAYER_SIZE: f32 = 64.0;
-pub const PLAYER_SPEED: f32 = 500.0;
 
 pub fn spawn_player(
     mut commands: Commands,

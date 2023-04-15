@@ -1,13 +1,12 @@
-use super::components::*;
-use super::resources::*;
-use crate::utils::*;
-
 use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use rand::prelude::*;
 
-pub const NUMBER_OF_STARS: usize = 10;
-pub const STAR_SIZE: f32 = 30.0;
+use crate::utils::*;
+
+use super::components::*;
+use super::resources::*;
+use super::*;
 
 pub fn spawn_stars(
     mut commands: Commands,

@@ -1,13 +1,14 @@
 use bevy::prelude::*;
 
+mod systems;
+use systems::*;
+
+use crate::AppState;
+
 pub struct MainMenuPlugin;
 
 impl Plugin for MainMenuPlugin {
     fn build(&self, app: &mut App) {
-        app.add_startup_system(main_menu);
+        app.add_system(handle_key_q.in_set(OnUpdate(AppState::MainMenu)));
     }
-}
-
-pub fn main_menu() {
-    println!("You are on the main menu");
 }

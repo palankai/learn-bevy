@@ -14,7 +14,7 @@ use player::PlayerPlugin;
 use score::ScorePlugin;
 use star::StarPlugin;
 
-use systems::toggle_simulation;
+use systems::{pause_simulation, toggle_simulation};
 
 pub struct GamePlugin;
 
@@ -26,6 +26,7 @@ impl Plugin for GamePlugin {
             .add_plugin(PlayerPlugin)
             .add_plugin(ScorePlugin)
             .add_plugin(StarPlugin)
+            .add_system(pause_simulation.in_schedule(OnEnter(AppState::Game)))
             .add_system(toggle_simulation.run_if(in_state(AppState::Game)));
     }
 }

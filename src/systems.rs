@@ -35,36 +35,41 @@ pub fn update_camera_when_window_resized(
     }
 }
 
-pub fn handle_game_over(mut events: EventReader<GameOver>, mut commands: Commands) {
+pub fn handle_game_over(
+    mut events: EventReader<GameOver>,
+    mut next_app_state: ResMut<NextState<AppState>>,
+    mut next_simulation_state: ResMut<NextState<SimulationState>>,
+) {
     for event in events.iter() {
-        commands.insert_resource(NextState(Some(AppState::MainMenu)));
-        commands.insert_resource(NextState(Some(SimulationState::Paused)));
+        next_app_state.set(AppState::MainMenu);
+        next_simulation_state.set(SimulationState::Paused);
         println!("Game Over! Final Score: {}", event.score);
     }
 }
 
 pub fn transition_to_game_state(
-    mut commands: Commands,
     keyboard_input: Res<Input<KeyCode>>,
     app_state: Res<State<AppState>>,
+    mut next_app_state: ResMut<NextState<AppState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::G) {
         if app_state.0 != AppState::Game {
-            commands.insert_resource(NextState(Some(AppState::Game)));
+            next_app_state.set(AppState::Game);
             println!("Transitioning to Game");
         }
     }
 }
 
 pub fn transition_to_main_menu_state(
-    mut commands: Commands,
     keyboard_input: Res<Input<KeyCode>>,
     app_state: Res<State<AppState>>,
+    mut next_app_state: ResMut<NextState<AppState>>,
+    mut next_simulation_state: ResMut<NextState<SimulationState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::M) {
         if app_state.0 != AppState::MainMenu {
-            commands.insert_resource(NextState(Some(AppState::MainMenu)));
-            commands.insert_resource(NextState(Some(SimulationState::Paused)));
+            next_app_state.set(AppState::MainMenu);
+            next_simulation_state.set(SimulationState::Paused);
             println!("Transitioning to MainMenu");
         }
     }
